@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OKR Pilotage Management — V14</title>
+<title>PILOTAGE OKR — V14</title>
 <style>
 :root{
   --accent:#7b2cbf; --accent-2:#9d4edd; --accent-soft:#f5ecfb;
@@ -158,6 +158,28 @@ button{cursor:pointer}
 .vision-leadership-card{padding:12px;background:#071724;border-color:#18334a;overflow:hidden}.vision-embed-title{margin:0 0 10px;color:#fff;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.vision-leadership-frame{display:block;width:100%;height:min(82vh,1020px);min-height:680px;border:0;border-radius:12px;background:#06111b}.summary-filter-actions{display:flex!important;align-items:end;gap:10px;min-width:0!important}.summary-owner-field{display:grid;gap:5px;min-width:230px}.summary-report-btn{min-height:38px;white-space:nowrap;padding-left:15px;padding-right:15px}.summary-toolbar>.summary-filter-actions{grid-template-columns:none}.summary-toolbar>.summary-filter-actions label{font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:900;color:var(--muted)}.summary-toolbar>.summary-filter-actions select{min-height:38px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:8px 34px 8px 10px;font-size:11.5px;font-weight:800;color:var(--ink)}
 @media(max-width:820px){.vision-leadership-frame{min-height:560px;height:75vh}.summary-filter-actions{width:100%;flex-wrap:wrap}.summary-owner-field{min-width:0;flex:1 1 220px}.summary-report-btn{flex:0 0 auto}}
 
+
+/* --- V14 : bandeau supérieur compact --- */
+.topbar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:9px 18px}
+.brand{min-width:max-content}
+.brand-text{display:none!important}
+.brand-mark{width:auto;height:34px;min-width:0;padding:0 13px;border-radius:10px;font-size:11px;line-height:1;letter-spacing:.075em;white-space:nowrap}
+.top-tabs{min-width:0;margin:0;padding:3px;border-radius:11px;box-shadow:none;justify-self:center;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.top-tabs::-webkit-scrollbar{display:none}
+.top-tabs .tab{flex:0 0 auto;white-space:nowrap;padding:7px 10px;font-size:11px;border-radius:8px}
+.top-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:nowrap;min-width:max-content}
+.icon-btn{width:34px;height:34px;min-height:34px;padding:0;border-radius:10px;flex:0 0 34px}
+.icon-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.user-chip{display:grid;place-items:center;width:34px;height:34px;max-width:none;padding:0;border:1px solid #e2cfef;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:950;line-height:1}
+.sync-pill{display:none!important}
+@media(max-width:900px){
+  .topbar{grid-template-columns:auto 1fr auto;grid-template-areas:"brand spacer actions" "tabs tabs tabs";gap:8px 10px;padding:9px 12px}
+  .brand{grid-area:brand}.top-tabs{grid-area:tabs;justify-self:stretch;position:static!important;top:auto!important;z-index:auto!important}.top-actions{grid-area:actions}.top-actions .icon-btn{flex:0 0 34px}
+}
+@media(max-width:560px){
+  .brand-mark{height:32px;padding:0 10px;font-size:10px}.icon-btn,.user-chip{width:32px;height:32px;min-height:32px;flex-basis:32px}.icon-btn svg{width:16px;height:16px}.top-tabs .tab{padding:7px 9px;font-size:10.5px}
+}
+
 </style>
 </head>
 <body class="auth-pending">
@@ -165,7 +187,7 @@ button{cursor:pointer}
 <div class="auth-screen" id="auth-screen">
   <div class="auth-card">
     <div class="auth-logo">O</div>
-    <h1>OKR Pilotage Management</h1>
+    <h1>PILOTAGE OKR</h1>
     <p>Connectez-vous pour accéder à l’espace partagé. Les objectifs, KR, actions, risques, paramètres et photos hebdomadaires sont synchronisés via Supabase.</p>
     <form class="auth-form" id="login-form">
       <div class="auth-field"><label>Adresse email</label><input id="login-email" type="email" autocomplete="email" required placeholder="prenom.nom@entreprise.com"></div>
@@ -182,29 +204,35 @@ button{cursor:pointer}
 
 <div class="topbar">
   <div class="brand">
-    <div class="brand-mark">O</div>
-    <div class="brand-text">
-      <div class="brand-title">OKR Pilotage Management</div>
-      <div class="brand-sub">Suivi hebdomadaire · alertes · historique · synthèse de management</div>
-    </div>
+    <div class="brand-mark" aria-label="Pilotage OKR">PILOTAGE OKR</div>
   </div>
-  <div class="top-actions">
-    <span class="sync-pill" id="cloud-sync-pill" data-state="loading" title="Etat de synchronisation">Connexion…</span>
-    <button class="btn small" id="remote-refresh-btn" type="button" hidden>↻ Actualiser</button>
-    <span class="user-chip" id="user-email" hidden></span>
-    <button class="btn small" id="photo-weekly-btn" type="button">📸 Photo hebdo</button>
-    <button class="btn small" id="export-btn">Exporter JSON</button>
-    <button class="btn small" id="logout-btn" type="button" hidden>Déconnexion</button>
-  </div>
-</div>
 
-<main class="app">
-  <nav class="tabs" aria-label="Navigation principale">
+  <nav class="tabs top-tabs" aria-label="Navigation principale">
     <button class="tab" data-view="vision">Vision &amp; Guideline</button>
     <button class="tab active" data-view="detail">OKR détaillés</button>
     <button class="tab" data-view="summary">Synthèse</button>
     <button class="tab" data-view="settings">Règles & paramètres</button>
   </nav>
+
+  <div class="top-actions">
+    <span class="sync-pill" id="cloud-sync-pill" data-state="loading" title="Etat de synchronisation" hidden>Connexion…</span>
+    <button class="btn icon-btn" id="photo-weekly-btn" type="button" title="Photo hebdo" aria-label="Créer une photo hebdomadaire">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5 10 3.5h4l1.5 2H19a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2h3.5Z"/><circle cx="12" cy="12.5" r="4"/></svg>
+    </button>
+    <button class="btn icon-btn" id="export-btn" type="button" title="Exporter JSON" aria-label="Exporter les données en JSON">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M5 19h14"/></svg>
+    </button>
+    <button class="btn icon-btn" id="remote-refresh-btn" type="button" title="Actualiser les données" aria-label="Actualiser les données" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5"/><path d="M4 18v-5h5"/><path d="M6.1 9a7 7 0 0 1 11.6-2.3L20 11"/><path d="M4 13l2.3 4.3A7 7 0 0 0 18 15"/></svg>
+    </button>
+    <span class="user-chip" id="user-email" title="Utilisateur" aria-label="Utilisateur" hidden></span>
+    <button class="btn icon-btn danger" id="logout-btn" type="button" title="Déconnexion" aria-label="Se déconnecter" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4"/><path d="M14 8l4 4-4 4"/><path d="M18 12H9"/></svg>
+    </button>
+  </div>
+</div>
+
+<main class="app">
 
 
   <section id="view-vision" class="view" hidden>
@@ -552,7 +580,7 @@ function subscribeRealtime(){if(!supabaseClient||!currentUser)return;if(realtime
 
 async function authenticateSession(session){
   currentUser=session&&session.user?session.user:null;if(!currentUser)return;
-  document.body.classList.remove("auth-pending");document.getElementById("auth-screen").hidden=true;const email=document.getElementById("user-email");email.textContent=currentUser.email||"Utilisateur";email.hidden=false;document.getElementById("logout-btn").hidden=false;authError("");
+  document.body.classList.remove("auth-pending");document.getElementById("auth-screen").hidden=true;const email=document.getElementById("user-email"),fullEmail=currentUser.email||"Utilisateur";email.textContent=(fullEmail.trim().charAt(0)||"U").toUpperCase();email.title=fullEmail;email.setAttribute("aria-label","Utilisateur "+fullEmail);email.hidden=false;document.getElementById("logout-btn").hidden=false;authError("");
   try{await loadRemoteIntoApp({force:false});subscribeRealtime()}catch(e){supabaseReady=false;handleSupabaseError(e);renderAllDerived()}
 }
 async function loginPassword(){const email=document.getElementById("login-email").value.trim(),password=document.getElementById("login-password").value;if(!email||!password){authError("Renseignez l'adresse email et le mot de passe.");return}authError("");setCloudStatus("loading","Connexion…");const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){authError(error.message);return}await authenticateSession(data.session)}
@@ -789,7 +817,7 @@ function buildSummaryReportHtml(){
   const sections=summaryReportSection('Synthèse globale','')+(owner?summaryReportSection('Synthèse filtrée',owner):'');
   return '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rapport Synthèse OKR</title><style>'+ 
   ':root{--green:#11b86b;--yellow:#f0d400;--red:#d80f0f;--orange:#a15c00;--ink:#1f2430;--muted:#667085;--line:#e7e8ec;--accent:#7b2cbf}*{box-sizing:border-box}body{margin:0;background:#f5f6f8;color:var(--ink);font-family:Inter,Arial,sans-serif}.page{max-width:1120px;margin:0 auto;padding:34px 24px 60px}.report-title{background:#24112f;color:#fff;border-radius:18px;padding:24px 26px;margin-bottom:18px}.report-title h1{margin:0 0 5px;font-size:27px}.report-title p{margin:0;color:#e9dff0;font-size:13px}.report-section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 7px 24px rgba(16,24,40,.06)}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--accent)}h2{margin:4px 0 0;font-size:21px}.photo-date{font-size:11px;color:var(--muted);font-weight:700}.report-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfbfc}.metric>span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:900;color:var(--muted);margin-bottom:10px}.metric>strong{font-size:30px}.confidence-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.color-count{border-radius:12px;padding:10px 8px;text-align:center;border:1px solid rgba(0,0,0,.08)}.color-count b{display:block;font-size:22px;color:#111}.color-count small{font-size:10px;font-weight:900;color:#111}.color-count.green{background:var(--green)}.color-count.yellow{background:var(--yellow)}.color-count.red{background:var(--red)}.stagnation-mini{display:flex;gap:7px;margin-top:8px;flex-wrap:wrap}.stagnation-mini em{font-style:normal;font-size:10px;font-weight:900;padding:4px 7px;border-radius:999px}.stagnation-mini .orange{background:#fff4e5;color:#a15c00}.stagnation-mini .red{background:#fdecea;color:#961b14}.stalled{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}.stalled h3{font-size:12px;margin:0 0 8px}.stalled-line{display:grid;grid-template-columns:12px 1fr auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #f0f1f3}.stalled-line b{font-size:11px}.stalled-line small{font-size:10px;color:var(--muted)}.status{width:10px;height:10px;border-radius:50%}.status.orange{background:#f59e0b}.status.red{background:var(--red)}.footer-report{margin-top:18px;color:var(--muted);font-size:10px;text-align:center}@media(max-width:760px){.report-grid{grid-template-columns:1fr}.section-head{display:block}.photo-date{margin-top:8px}}@media print{body{background:#fff}.page{max-width:none;padding:0}.report-title,.report-section{box-shadow:none;break-inside:avoid}}'+
-  '</style></head><body><main class="page"><header class="report-title"><h1>'+esc(org)+'</h1><p>Rapport de synthèse OKR · généré le '+esc(generated)+'</p></header>'+sections+'<div class="footer-report">Rapport généré depuis OKR Pilotage Management V14 · historique détaillé non inclus.</div></main></body></html>';
+  '</style></head><body><main class="page"><header class="report-title"><h1>'+esc(org)+'</h1><p>Rapport de synthèse OKR · généré le '+esc(generated)+'</p></header>'+sections+'<div class="footer-report">Rapport généré depuis PILOTAGE OKR V14 · historique détaillé non inclus.</div></main></body></html>';
 }
 function downloadSummaryReport(){
   const html=buildSummaryReportHtml(),blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
