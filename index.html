@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PILOTAGE OKR — V14</title>
+<title>PILOTAGE OKR — V15</title>
 <style>
 :root{
   --accent:#7b2cbf; --accent-2:#9d4edd; --accent-soft:#f5ecfb;
@@ -155,7 +155,7 @@ button{cursor:pointer}
 
 
 /* --- V14 : Voice of Leadership intégré + rapport de synthèse HTML --- */
-.vision-leadership-card{padding:12px;background:#071724;border-color:#18334a;overflow:hidden}.vision-embed-title{margin:0 0 10px;color:#fff;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.vision-leadership-frame{display:block;width:100%;height:min(82vh,1020px);min-height:680px;border:0;border-radius:12px;background:#06111b}.summary-filter-actions{display:flex!important;align-items:end;gap:10px;min-width:0!important}.summary-owner-field{display:grid;gap:5px;min-width:230px}.summary-report-btn{min-height:38px;white-space:nowrap;padding-left:15px;padding-right:15px}.summary-toolbar>.summary-filter-actions{grid-template-columns:none}.summary-toolbar>.summary-filter-actions label{font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:900;color:var(--muted)}.summary-toolbar>.summary-filter-actions select{min-height:38px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:8px 34px 8px 10px;font-size:11.5px;font-weight:800;color:var(--ink)}
+.vision-leadership-card{padding:12px;background:#fff;border-color:var(--line);overflow:hidden}.vision-embed-title{margin:0 0 10px;color:var(--ink);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.vision-leadership-frame{display:block;width:100%;height:min(82vh,1020px);min-height:680px;border:0;border-radius:12px;background:#fff}.summary-filter-actions{display:flex!important;align-items:end;gap:10px;min-width:0!important}.summary-owner-field{display:grid;gap:5px;min-width:230px}.summary-report-btn{min-height:38px;white-space:nowrap;padding-left:15px;padding-right:15px}.summary-toolbar>.summary-filter-actions{grid-template-columns:none}.summary-toolbar>.summary-filter-actions label{font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:900;color:var(--muted)}.summary-toolbar>.summary-filter-actions select{min-height:38px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:8px 34px 8px 10px;font-size:11.5px;font-weight:800;color:var(--ink)}
 @media(max-width:820px){.vision-leadership-frame{min-height:560px;height:75vh}.summary-filter-actions{width:100%;flex-wrap:wrap}.summary-owner-field{min-width:0;flex:1 1 220px}.summary-report-btn{flex:0 0 auto}}
 
 
@@ -204,7 +204,7 @@ button{cursor:pointer}
 
 <div class="topbar">
   <div class="brand">
-    <div class="brand-mark" aria-label="Pilotage OKR">PILOTAGE OKR</div>
+    <div class="brand-mark" id="org-title-display" aria-label="Nom de la direction / organisation">PILOTAGE OKR</div>
   </div>
 
   <nav class="tabs top-tabs" aria-label="Navigation principale">
@@ -817,7 +817,7 @@ function buildSummaryReportHtml(){
   const sections=summaryReportSection('Synthèse globale','')+(owner?summaryReportSection('Synthèse filtrée',owner):'');
   return '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rapport Synthèse OKR</title><style>'+ 
   ':root{--green:#11b86b;--yellow:#f0d400;--red:#d80f0f;--orange:#a15c00;--ink:#1f2430;--muted:#667085;--line:#e7e8ec;--accent:#7b2cbf}*{box-sizing:border-box}body{margin:0;background:#f5f6f8;color:var(--ink);font-family:Inter,Arial,sans-serif}.page{max-width:1120px;margin:0 auto;padding:34px 24px 60px}.report-title{background:#24112f;color:#fff;border-radius:18px;padding:24px 26px;margin-bottom:18px}.report-title h1{margin:0 0 5px;font-size:27px}.report-title p{margin:0;color:#e9dff0;font-size:13px}.report-section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 7px 24px rgba(16,24,40,.06)}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--accent)}h2{margin:4px 0 0;font-size:21px}.photo-date{font-size:11px;color:var(--muted);font-weight:700}.report-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfbfc}.metric>span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:900;color:var(--muted);margin-bottom:10px}.metric>strong{font-size:30px}.confidence-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.color-count{border-radius:12px;padding:10px 8px;text-align:center;border:1px solid rgba(0,0,0,.08)}.color-count b{display:block;font-size:22px;color:#111}.color-count small{font-size:10px;font-weight:900;color:#111}.color-count.green{background:var(--green)}.color-count.yellow{background:var(--yellow)}.color-count.red{background:var(--red)}.stagnation-mini{display:flex;gap:7px;margin-top:8px;flex-wrap:wrap}.stagnation-mini em{font-style:normal;font-size:10px;font-weight:900;padding:4px 7px;border-radius:999px}.stagnation-mini .orange{background:#fff4e5;color:#a15c00}.stagnation-mini .red{background:#fdecea;color:#961b14}.stalled{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}.stalled h3{font-size:12px;margin:0 0 8px}.stalled-line{display:grid;grid-template-columns:12px 1fr auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #f0f1f3}.stalled-line b{font-size:11px}.stalled-line small{font-size:10px;color:var(--muted)}.status{width:10px;height:10px;border-radius:50%}.status.orange{background:#f59e0b}.status.red{background:var(--red)}.footer-report{margin-top:18px;color:var(--muted);font-size:10px;text-align:center}@media(max-width:760px){.report-grid{grid-template-columns:1fr}.section-head{display:block}.photo-date{margin-top:8px}}@media print{body{background:#fff}.page{max-width:none;padding:0}.report-title,.report-section{box-shadow:none;break-inside:avoid}}'+
-  '</style></head><body><main class="page"><header class="report-title"><h1>'+esc(org)+'</h1><p>Rapport de synthèse OKR · généré le '+esc(generated)+'</p></header>'+sections+'<div class="footer-report">Rapport généré depuis PILOTAGE OKR V14 · historique détaillé non inclus.</div></main></body></html>';
+  '</style></head><body><main class="page"><header class="report-title"><h1>'+esc(org)+'</h1><p>Rapport de synthèse OKR · généré le '+esc(generated)+'</p></header>'+sections+'<div class="footer-report">Rapport généré depuis PILOTAGE OKR V15 · historique détaillé non inclus.</div></main></body></html>';
 }
 function downloadSummaryReport(){
   const html=buildSummaryReportHtml(),blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
